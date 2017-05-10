@@ -30,15 +30,15 @@ localparam [2:0] 	ADD = 3'b010,
 						SUB = 3'b110,
 						AND = 3'b000,
 						OR = 3'b001,
-						LES = 3'b111,
-						TEST = 3'b000;
+						SLT = 3'b111;
+						//TEST = 3'b000;
 always @ *
 case(control)
-	TEST:
+	/*TEST:
 	begin
 		result = 32'hzzzzzzzz;
 		zero = 0;
-	end
+	end*/
 	ADD: 
 	begin
 		result = A + B;
@@ -51,15 +51,15 @@ case(control)
 	end
 	AND: 
 	begin
-		result = A && B;
+		result = A & B;
 		zero = 0;
 	end
 	OR: 
 	begin
-		result = A || B;
+		result = A | B;
 		zero = 0;
 	end
-	LES:
+	SLT:
 	begin
 		zero = A < B? 1 : 0;
 		result = 32'h00000000;

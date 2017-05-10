@@ -378,9 +378,9 @@ LAB45:    memcpy(t10, t42, 8);
 }
 
 
-extern void work_m_00000000000724739723_2725559894_init()
+extern void work_m_00000000000852503546_2725559894_init()
 {
 	static char *pe[] = {(void *)Always_35_0};
-	xsi_register_didat("work_m_00000000000724739723_2725559894", "isim/pipeline_tb_isim_beh.exe.sim/work/m_00000000000724739723_2725559894.didat");
+	xsi_register_didat("work_m_00000000000852503546_2725559894", "isim/pipeline_tb_isim_beh.exe.sim/work/m_00000000000852503546_2725559894.didat");
 	xsi_register_executes(pe);
 }

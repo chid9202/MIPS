@@ -23,14 +23,14 @@ module alu_control(
 	input wire [1:0] alu_op,
 	output reg [2:0] select
     );
-localparam [1:0] 	LWSW = 2'b00, //define constant
+localparam [1:0] 	LWSW = 2'b00, // alu_op
 						BEQ = 2'b01,
 						RType = 2'b10;
-localparam [5:0]	ADD = 6'b100000,
+localparam [5:0]	ADD = 6'b100000, // funct
 						SUB = 6'b100010,
 						AND = 6'b100100,
 						OR = 6'b100101,
-						LES = 6'b101010;
+						SLT = 6'b101010;
 						
 always @ *
 
@@ -62,7 +62,7 @@ case(alu_op)
 			begin
 				select = 3'b001;
 			end
-			LES:
+			SLT:
 			begin
 				select = 3'b111;
 			end
