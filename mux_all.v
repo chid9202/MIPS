@@ -24,7 +24,7 @@ module mux_all #(SIZE = 32)(
 	output [SIZE-1:0] y
     );
 	 
-assign y = sel ? A : B;
+assign y = sel ? a : b;
 
 
 

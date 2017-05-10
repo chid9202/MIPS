@@ -27,7 +27,9 @@ reg [31:0] mem[255:0];
 
 initial
 begin
-	mem[0] = 32'h002300AA;
+	mem[0] = 32'h00220020;
+	mem[1] = 32'h00851824;
+	/*mem[0] = 32'h002300AA;
 	mem[1] = 32'h10000011;
 	mem[2] = 32'h10654321;
 	mem[3] = 32'h00100022;
@@ -41,7 +43,7 @@ begin
 	mem[11] = 32'hAC000099; //sw
 	mem[12] = 32'h8C000099; //lw
 	mem[13] = 32'h10000011; //beq
-	mem[14] = 32'h002300AA;
+	mem[14] = 32'h002300AA;*/
 end
 
 always @ (posedge clk)

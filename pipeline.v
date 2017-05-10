@@ -24,17 +24,22 @@ input PCSrc,
 input [31:0] EX_MEM_latch,
 input regwrite,
 input [31:0] writedata,
-output [1:0] WB_ctrl,
-output [2:0] Mem_ctrl,
-output [3:0] EX_ctrl,
-output [31:0] EX_adder,
-output [31:0] EX_ALU,
-output [31:0] EXMux0_latch,
-output [31:0] IR_out,
-output [4:0]  EXMux0,
-output [4:0]  EXMux1
+output wire [1:0]  EX_MEM_wb_ctlout,
+output wire [2:0]  EX_MEM_m_ctlout,
+output wire [31:0] EX_MEM_add_result, 
+output wire   	    EX_MEM_zero,
+output wire [31:0] EX_MEM_alu_result, 
+output wire [31:0] EX_MEM_rdata2out, 
+output wire [4:0]  EX_MEM_five_bit_muxout
     );
-wire [31:0] w1,w2;
+//if - id
+wire [31:0] w1,w2; 
+// id - ex
+wire [1:0] w3;
+wire [2:0] w4;
+wire [3:0] w5;
+wire [31:0] w6,w7,w8,w9;
+wire [4:0] w10,w11;
 
 IF_stage if_stage(.clk(clk),
 .PCSrc(PCSrc),
@@ -48,14 +53,37 @@ ID_stage id_stage(.clk(clk),
 .RegWrite(regwrite),
 .writedata(writedata),
 .IF_ID_latch(w1),
-.WB_ctrl(WB_ctrl),
-.Mem_ctrl(Mem_ctrl),
-.EX_ctrl(EX_ctrl),
-.EX_adder(EX_adder),
-.EX_ALU(EX_ALU),
-.EXMux0_latch(EXMux0_latch),
-.IR_out(IR_out),
-.EXMux0(EXMux0),
-.EXMux1(EXMux1)
+.WB_ctrl(w3),
+.Mem_ctrl(w4),
+.EX_ctrl(w5),
+.EX_adder(w6),
+.EX_ALU(w7),
+.EXMux0_latch(w8),
+.IR_out(w9),
+.EXMux0(w10),
+.EXMux1(w11)
     );
+	 
+EX_stage ex_stage(.clk(clk),
+.wb_ctlout(w3), 	// input
+.m_ctlout(w4),
+.ex_ctlout(w5),
+.npcout(w6),
+.rdata1out(w7),
+.rdata2out(w8),
+.s_extendout(w9),
+.instrout_2016(w10),
+.instrout_1511(w11),
+.EX_MEM_wb_ctlout(EX_MEM_wb_ctlout),	// ouput
+.EX_MEM_m_ctlout(EX_MEM_m_ctlout),
+.EX_MEM_add_result(EX_MEM_add_result),
+.EX_MEM_zero(EX_MEM_zero),
+.EX_MEM_alu_result(EX_MEM_alu_result),
+.EX_MEM_rdata2out(EX_MEM_rdata2out),
+.EX_MEM_five_bit_muxout(EX_MEM_five_bit_muxout)
+);
+
+
+
+
 endmodule

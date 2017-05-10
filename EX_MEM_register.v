@@ -27,7 +27,6 @@ module EX_MEM_register(
 	input wire [31:0] aluout,
 	input wire [31:0] readdat2,
 	input wire [4:0]  muxout,
-	
 	output reg [1:0]  wb_ctlout,
 	output reg [2:0]  m_ctlout,
 	output reg [31:0] add_result, 
@@ -36,6 +35,14 @@ module EX_MEM_register(
 	output reg [31:0] rdata2out, 
 	output reg [4:0]  five_bit_muxout
     );
-
+always @ (posedge clk) begin
+	wb_ctlout <= ctlwb_out;
+	m_ctlout <= ctlm_out;
+	add_result <= adder_out;
+	zero <= aluzero;
+	alu_result <= aluout;
+	rdata2out <= readdat2;
+	five_bit_muxout <= muxout;
+end
 
 endmodule

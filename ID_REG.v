@@ -32,12 +32,13 @@ for( i = 0; i<32; i= i+1)
 	regFile[i] = i;
 	//regFile[0] = 32'hFFFFFFFF; test if A and B work
 end
+always @ *
+begin
+A = regFile[RS];
+B = regFile[RT];
+end
 always @ ( posedge clk )
 	begin
-		if(regwrite)
-			regFile[RD] <= writedata;
-		else
-			A <= regFile[RS];
-			B <= regFile[RT];
+		regFile[RD] <= writedata;
 	end
 endmodule

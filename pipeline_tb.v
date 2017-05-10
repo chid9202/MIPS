@@ -4,7 +4,7 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   15:29:06 04/19/2017
+// Create Date:   10:16:15 05/03/2017
 // Design Name:   pipeline
 // Module Name:   C:/Users/004173090/pipeline/pipeline_tb.v
 // Project Name:  pipeline
@@ -24,7 +24,7 @@
 
 module pipeline_tb;
 
-	// Inputs 
+	// Inputs
 	reg clk;
 	reg PCSrc;
 	reg [31:0] EX_MEM_latch;
@@ -32,34 +32,30 @@ module pipeline_tb;
 	reg [31:0] writedata;
 
 	// Outputs
-	wire [1:0] WB_ctrl;
-	wire [2:0] Mem_ctrl;
-	wire [3:0] EX_ctrl;
-	wire [31:0] EX_adder;
-	wire [31:0] EX_ALU;
-	wire [31:0] EXMux0_latch;
-	wire [31:0] IR_out;
-	wire [4:0] EXMux0;
-	wire [4:0] EXMux1;
+	wire [1:0] EX_MEM_wb_ctlout;
+	wire [2:0] EX_MEM_m_ctlout;
+	wire [31:0] EX_MEM_add_result;
+	wire EX_MEM_zero;
+	wire [31:0] EX_MEM_alu_result;
+	wire [31:0] EX_MEM_rdata2out; 
+	wire [4:0] EX_MEM_five_bit_muxout;
 
 	// Instantiate the Unit Under Test (UUT)
 	pipeline uut (
 		.clk(clk), 
-		.PCSrc(PCSrc), 
+		.PCSrc(PCSrc),   
 		.EX_MEM_latch(EX_MEM_latch), 
 		.regwrite(regwrite), 
 		.writedata(writedata), 
-		.WB_ctrl(WB_ctrl), 
-		.Mem_ctrl(Mem_ctrl), 
-		.EX_ctrl(EX_ctrl), 
-		.EX_adder(EX_adder), 
-		.EX_ALU(EX_ALU), 
-		.EXMux0_latch(EXMux0_latch), 
-		.IR_out(IR_out), 
-		.EXMux0(EXMux0), 
-		.EXMux1(EXMux1)
+		.EX_MEM_wb_ctlout(EX_MEM_wb_ctlout), 
+		.EX_MEM_m_ctlout(EX_MEM_m_ctlout), 
+		.EX_MEM_add_result(EX_MEM_add_result), 
+		.EX_MEM_zero(EX_MEM_zero), 
+		.EX_MEM_alu_result(EX_MEM_alu_result), 
+		.EX_MEM_rdata2out(EX_MEM_rdata2out), 
+		.EX_MEM_five_bit_muxout(EX_MEM_five_bit_muxout)
 	);
-	always #10 clk = !clk;
+always #10 clk = ~clk;
 	initial begin
 		// Initialize Inputs
 		clk = 0;
@@ -67,7 +63,7 @@ module pipeline_tb;
 		EX_MEM_latch = 0;
 		regwrite = 0;
 		writedata = 0;
-
+		
 		// Wait 100 ns for global reset to finish
 		#100;
         
